@@ -148,3 +148,7 @@ cython_debug/
 .coverage
 *.pyc
 htmlcov
+*.tar.gz
+*.gz
+*.tar
+*.zip
