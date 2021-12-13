@@ -5,7 +5,7 @@ class Apartment:
         self.bedrooms: int = 1
         self.occupants: int = 1
         self.guests: int = 0
-        self.default_water_mix = []
+        self.default_water_mix: list = []
         self.default_water_consumption: float = 0.0
         self.additional_water_consumption: float = 0.0
         self.monthly_bill: float = 0.0

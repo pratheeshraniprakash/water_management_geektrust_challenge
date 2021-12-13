@@ -162,62 +162,62 @@ class Test(unittest.TestCase):
 
     def test_input_add_command_0(self):
         input_line = "ALLOT_WATER 2 3:7\n"
-        input = Input()
-        input.add_command(input_line)
-        self.assertIsInstance(input.command_list, list)
+        input_ = Input()
+        input_.add_command(input_line)
+        self.assertIsInstance(input_.command_list, list)
 
     def test_input_add_command_1(self):
         input_line = "ADD_GUESTS 2\n"
-        input = Input()
-        input.add_command(input_line)
-        self.assertIsInstance(input.command_list, list)
+        input_ = Input()
+        input_.add_command(input_line)
+        self.assertIsInstance(input_.command_list, list)
 
     def test_input_add_command_2(self):
         input_line = "BILL\n"
-        input = Input()
-        input.add_command(input_line)
-        self.assertIsInstance(input.command_list, list)
+        input_ = Input()
+        input_.add_command(input_line)
+        self.assertIsInstance(input_.command_list, list)
 
     def test_input_add_command_3(self):
         input_line = ""
-        input = Input()
-        self.assertRaises(ValueError, input.add_command, input_line)
+        input_ = Input()
+        self.assertRaises(ValueError, input_.add_command, input_line)
 
     def test_input_add_command_4(self):
         input_line = "abcd"
-        input = Input()
-        self.assertRaises(ValueError, input.add_command, input_line)
+        input_ = Input()
+        self.assertRaises(ValueError, input_.add_command, input_line)
 
     def test_input_add_command_5(self):
         input_line = 1234
-        input = Input()
-        self.assertRaises(TypeError, input.add_command, input_line)
+        input_ = Input()
+        self.assertRaises(TypeError, input_.add_command, input_line)
 
     def test_input_add_command_6(self):
         input_line = "ALLOT_WATER 2 3|7\n"
-        input = Input()
-        self.assertRaises(Exception, input.add_command, input_line)
+        input_ = Input()
+        self.assertRaises(Exception, input_.add_command, input_line)
 
     def test_input_add_command_7(self):
         input_line = "ALLOT_WATER 2 3/7\n"
-        input = Input()
-        self.assertRaises(Exception, input.add_command, input_line)
+        input_ = Input()
+        self.assertRaises(Exception, input_.add_command, input_line)
 
     def test_input_add_command_8(self):
         input_line = "ALLOT_WATER 2 3 7\n"
-        input = Input()
-        self.assertRaises(Exception, input.add_command, input_line)
+        input_ = Input()
+        self.assertRaises(Exception, input_.add_command, input_line)
 
     def test_input_add_command_9(self):
         input_line = "ALLOT_WATER 2 3 7\n"
-        input = Input()
-        self.assertRaises(Exception, input.add_command, input_line)
+        input_ = Input()
+        self.assertRaises(Exception, input_.add_command, input_line)
 
     def test_input_get_commands_0(self):
         input_line = "ALLOT_WATER 2 3:7\n"
-        input = Input()
-        input.add_command(input_line)
-        self.assertIsInstance(input.get_commands(), list)
+        input_ = Input()
+        input_.add_command(input_line)
+        self.assertIsInstance(input_.get_commands(), list)
 
     def test_command_allot_0(self):
         command = Command("ALLOT_WATER", "2 3:7")
@@ -266,31 +266,31 @@ class Test(unittest.TestCase):
         self.assertIsInstance(command.parameter_list, list)
 
     def test_output_1(self):
-        input = Input()
-        input.add_command("ALLOT_WATER 2 3:7\n")
-        input.add_command("ADD_GUESTS 2")
-        input.add_command("ADD_GUESTS 3")
-        input.add_command("BILL")
-        output = Output(input.get_commands())
+        input_ = Input()
+        input_.add_command("ALLOT_WATER 2 3:7\n")
+        input_.add_command("ADD_GUESTS 2")
+        input_.add_command("ADD_GUESTS 3")
+        input_.add_command("BILL")
+        output = Output(input_.get_commands())
         self.assertIsInstance(output.execute(), tuple)
 
     def test_output_2(self):
-        input = Input()
-        input.add_command("ALLOT_WATER 2 3:7\n")
-        input.add_command("ADD_GUESTS 2")
-        input.add_command("ADD_GUESTS 3")
-        input.add_command("BILL")
-        output = Output(input.get_commands())
+        input_ = Input()
+        input_.add_command("ALLOT_WATER 2 3:7\n")
+        input_.add_command("ADD_GUESTS 2")
+        input_.add_command("ADD_GUESTS 3")
+        input_.add_command("BILL")
+        output = Output(input_.get_commands())
         self.assertTupleEqual(output.execute(), (2400, 5215))
 
     def test_get_input_1(self):
-        input = getinput("tests/input_1.txt")
-        self.assertIsInstance(input, Input)
+        input_ = getinput("tests/input_1.txt")
+        self.assertIsInstance(input_, Input)
 
     def test_get_input_2(self):
-        input = getinput("tests/input_2.txt")
-        self.assertIsInstance(input, Input)
+        input_ = getinput("tests/input_2.txt")
+        self.assertIsInstance(input_, Input)
 
     def test_get_input_3(self):
-        input = getinput("tests/input_3.txt")
-        self.assertIsInstance(input, Input)
+        input_ = getinput("tests/input_3.txt")
+        self.assertIsInstance(input_, Input)
