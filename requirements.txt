@@ -1,4 +1,4 @@
-lxml==4.5.0
+lxml==4.6.3
 cryptography==2.8
 keyring==18.0.1
 toml==0.10.1
