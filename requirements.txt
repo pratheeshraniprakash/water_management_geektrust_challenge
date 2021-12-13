@@ -1,5 +1,5 @@
 lxml==4.5.0
-cryptography==2.8
+cryptography==3.3.2
 keyring==18.0.1
 toml==0.10.1
 typing_extensions==3.7.4.3
