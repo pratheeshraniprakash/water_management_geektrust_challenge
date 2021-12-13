@@ -349,3 +349,8 @@ class Test(unittest.TestCase):
         """Tests getinput()"""
         input_ = getinput("tests/input_3.txt")
         self.assertIsInstance(input_, Input)
+
+    def test_get_input_4(self):
+        """Tests getinput()"""
+        input_ = getinput("tests/input_4.txt")
+        self.assertIsInstance(input_, Input)
