@@ -22,7 +22,7 @@ class Input:
 
         if line.startswith("ALLOT_WATER"):
             command = "ALLOT_WATER"
-            if not ":" in line:
+            if ":" not in line:
                 raise Exception
             parameters = line.replace("ALLOT_WATER", "").strip()
         elif line.startswith("ADD_GUESTS"):
