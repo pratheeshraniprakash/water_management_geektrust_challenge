@@ -279,13 +279,13 @@ class Test(unittest.TestCase):
         self.assertTupleEqual(output.execute(), (2400, 5215))
 
     def test_get_input_1(self):
-        input = getinput('input_1.txt')
+        input = getinput('tests/input_1.txt')
         self.assertIsInstance(input, Input)
 
     def test_get_input_2(self):
-        input = getinput('input_2.txt')
+        input = getinput('tests/input_2.txt')
         self.assertIsInstance(input, Input)
 
     def test_get_input_3(self):
-        input = getinput('input_3.txt')
+        input = getinput('tests/input_3.txt')
         self.assertIsInstance(input, Input)
