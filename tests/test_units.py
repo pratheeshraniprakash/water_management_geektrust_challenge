@@ -3,6 +3,7 @@ from core.models import Apartment, Water, Corporation, Borewell, Tanker
 from utils.utils import Input, Output, Command
 from geektrust import getinput
 
+
 class Test(unittest.TestCase):
     def setUp(self) -> None:
         self.apartment = Apartment()
@@ -12,7 +13,7 @@ class Test(unittest.TestCase):
         self.water_mix_3 = map(int, ["1", "2", "3"])
 
         return super().setUp()
-    
+
     def test_add_bedroom_0(self):
         self.apartment.set_bedrooms(2)
         self.assertEqual(self.apartment.bedrooms, 2)
@@ -92,7 +93,7 @@ class Test(unittest.TestCase):
 
     def test_compute_monthly_bill_1(self):
         self.apartment.set_bedrooms(2)
-        self.apartment.set_water_mix(map(int, ['3', '7']))
+        self.apartment.set_water_mix(map(int, ["3", "7"]))
         self.apartment.add_guests(2)
         self.apartment.add_guests(3)
         self.apartment.compute_monthly_water_consumption()
@@ -101,7 +102,7 @@ class Test(unittest.TestCase):
 
     def test_compute_monthly_bill_2(self):
         self.apartment.set_bedrooms(3)
-        self.apartment.set_water_mix(map(int, ['2', '1']))
+        self.apartment.set_water_mix(map(int, ["2", "1"]))
         self.apartment.add_guests(4)
         self.apartment.add_guests(1)
         self.apartment.compute_monthly_water_consumption()
@@ -110,21 +111,21 @@ class Test(unittest.TestCase):
 
     def test_compute_monthly_bill_3(self):
         self.apartment.set_bedrooms(2)
-        self.apartment.set_water_mix(map(int, ['1', '2']))
+        self.apartment.set_water_mix(map(int, ["1", "2"]))
         self.apartment.compute_monthly_water_consumption()
         bill = self.apartment.compute_monthly_bill()
         self.assertEqual(bill, 1200)
 
     def test_normal_water_type(self):
-        normal_water = Water('Normal')
-        self.assertEqual(normal_water.type, 'Normal')
+        normal_water = Water("Normal")
+        self.assertEqual(normal_water.type, "Normal")
 
     def test_normal_water_unit_rate(self):
-        normal_water = Water('Normal')
+        normal_water = Water("Normal")
         self.assertAlmostEqual(normal_water.unit_rate, 0.0, 0)
 
     def test_normal_water_monthly_bill(self):
-        normal_water = Water('Normal')
+        normal_water = Water("Normal")
         self.assertAlmostEqual(normal_water.monthly_bill, 0.0, 0)
 
     def test_corporation_water(self):
@@ -220,7 +221,7 @@ class Test(unittest.TestCase):
 
     def test_command_allot_0(self):
         command = Command("ALLOT_WATER", "2 3:7")
-        self.assertEqual(command.command_string, 'ALLOT_WATER')
+        self.assertEqual(command.command_string, "ALLOT_WATER")
 
     def test_command_allot_1(self):
         command = Command("ALLOT_WATER", "2 3:7")
@@ -231,14 +232,18 @@ class Test(unittest.TestCase):
         self.assertIsInstance(command.parameter_list, list)
 
     def test_command_allot_3_1(self):
-        self.assertRaises(Exception, Command, command_string = "ALLOT_WATER", parameter_string = "2 3|7")
+        self.assertRaises(
+            Exception, Command, command_string="ALLOT_WATER", parameter_string="2 3|7"
+        )
 
     def test_command_allot_3_2(self):
-        self.assertRaises(Exception, Command, command_string = "ALLOT_WATER", parameter_string = "2 3/7")
+        self.assertRaises(
+            Exception, Command, command_string="ALLOT_WATER", parameter_string="2 3/7"
+        )
 
     def test_command_add_guest_0(self):
         command = Command("ADD_GUESTS", "2")
-        self.assertEqual(command.command_string, 'ADD_GUESTS')
+        self.assertEqual(command.command_string, "ADD_GUESTS")
 
     def test_command_add_guest_1(self):
         command = Command("ADD_GUESTS", "2")
@@ -250,7 +255,7 @@ class Test(unittest.TestCase):
 
     def test_command_bill_0(self):
         command = Command("BILL", "")
-        self.assertEqual(command.command_string, 'BILL')
+        self.assertEqual(command.command_string, "BILL")
 
     def test_command_bill_1(self):
         command = Command("BILL", "")
@@ -279,13 +284,13 @@ class Test(unittest.TestCase):
         self.assertTupleEqual(output.execute(), (2400, 5215))
 
     def test_get_input_1(self):
-        input = getinput('tests/input_1.txt')
+        input = getinput("tests/input_1.txt")
         self.assertIsInstance(input, Input)
 
     def test_get_input_2(self):
-        input = getinput('tests/input_2.txt')
+        input = getinput("tests/input_2.txt")
         self.assertIsInstance(input, Input)
 
     def test_get_input_3(self):
-        input = getinput('tests/input_3.txt')
+        input = getinput("tests/input_3.txt")
         self.assertIsInstance(input, Input)
