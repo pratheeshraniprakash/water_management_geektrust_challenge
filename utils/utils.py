@@ -65,7 +65,7 @@ class Output():
                     apartment.add_guests(guests)
             else:
                 consumption = apartment.compute_monthly_water_consumption()
-                bill = int(apartment.compute_monthly_bill())
+                bill = int(round(apartment.compute_monthly_bill(), 0))
                 return (consumption, bill)
                 
 
