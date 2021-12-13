@@ -5,6 +5,7 @@ from geektrust import getinput
 
 
 class Test(unittest.TestCase):
+    """Unit test class"""
     def setUp(self) -> None:
         self.apartment = Apartment()
         self.water_mix_0 = map(int, ["2", "1"])
