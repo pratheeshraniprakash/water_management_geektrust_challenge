@@ -146,3 +146,4 @@ cython_debug/
 # virtual environment directory
 .env
 .coverage
+*.pyc
