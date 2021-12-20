@@ -6,7 +6,9 @@ from geektrust import getinput
 
 class Test(unittest.TestCase):
     """Unit test class"""
+
     def setUp(self) -> None:
+        """Setting up tests"""
         self.apartment = Apartment()
         self.water_mix_0 = map(int, ["2", "1"])
         self.water_mix_1 = map(int, ["3", "7"])
@@ -187,6 +189,7 @@ class Test(unittest.TestCase):
         self.assertAlmostEqual(water.monthly_bill, 4500.0, 0)
 
     def test_tanker_water_2500(self):
+        """Tests Tanker class"""
         water = Tanker(2500)
         self.assertAlmostEqual(water.monthly_bill, 9000.0, 0)
 
@@ -247,6 +250,7 @@ class Test(unittest.TestCase):
         self.assertRaises(Exception, input_.add_command, input_line)
 
     def test_input_add_command_8(self):
+        """Tests Input.add _command() exception handling"""
         input_line = "ALLOT_WATER 2 3 7\n"
         input_ = Input()
         self.assertRaises(Exception, input_.add_command, input_line)
@@ -275,6 +279,7 @@ class Test(unittest.TestCase):
         self.assertIsInstance(command.command_string, str)
 
     def test_command_allot_2(self):
+        """Tests Command class"""
         command = Command("ALLOT_WATER", "2 3:7")
         self.assertIsInstance(command.parameter_list, list)
 
@@ -306,6 +311,7 @@ class Test(unittest.TestCase):
         self.assertIsInstance(command.parameter_list, list)
 
     def test_command_bill_0(self):
+        """Tests Command class"""
         command = Command("BILL", "")
         self.assertEqual(command.command_string, "BILL")
 

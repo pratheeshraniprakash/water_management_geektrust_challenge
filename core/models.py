@@ -83,7 +83,7 @@ class Water:
     """General class of water"""
 
     def __init__(self, monthly_consumption: float) -> None:
-        if  not(isinstance(monthly_consumption, float) or isinstance(monthly_consumption, int)):
+        if not isinstance(monthly_consumption, (float, int)):
             raise TypeError
         self.type: str = ''
         self.unit_rate: float = 0.0
@@ -144,5 +144,5 @@ class Tanker(Water):
         super().__init__(monthly_consumption)
         self.type: str = "Tanker"
         self.unit_rate: float = 0.0
-        self.monthly_bill: int = 0.0
+        self.monthly_bill: int = 0
         super().compute_monthly_bill()

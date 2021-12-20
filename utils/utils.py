@@ -7,7 +7,7 @@ class Input:
     def __init__(self) -> None:
         self.command_list: list = []
 
-    def add_command(self, line) -> None:
+    def add_command(self, line: str) -> None:
         """
         Adds command to execution queue
 
@@ -16,24 +16,24 @@ class Input:
         Returns:
             None
         """
-        parameters = ""
+        parameter_string = ""
         if not isinstance(line, str):
             raise TypeError
 
         if line.startswith("ALLOT_WATER"):
-            command = "ALLOT_WATER"
+            command_string = "ALLOT_WATER"
             if ":" not in line:
                 raise Exception
-            parameters = line.replace("ALLOT_WATER", "").strip()
+            parameter_string = line.replace("ALLOT_WATER", "").strip()
         elif line.startswith("ADD_GUESTS"):
-            command = "ADD_GUESTS"
-            parameters = line.replace("ADD_GUESTS", "").strip()
+            command_string = "ADD_GUESTS"
+            parameter_string = line.replace("ADD_GUESTS", "").strip()
         elif line.startswith("BILL"):
-            command = "BILL"
+            command_string = "BILL"
         else:
             raise ValueError
 
-        command = Command(command, parameters)
+        command = Command(command_string, parameter_string)
         self.command_list.append(command)
 
     def get_commands(self) -> list:
