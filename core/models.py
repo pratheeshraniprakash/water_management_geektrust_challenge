@@ -65,17 +65,13 @@ class Apartment:
             total_bill (float): Total monthly water bill for the apartment
         """
         default_consumption = self.default_water_consumption
+        corporation_water_share = round((default_consumption * (self.default_water_mix[0] / sum(self.default_water_mix))), 0)
+        borewell_water_share = round((default_consumption * (self.default_water_mix[1] / sum(self.default_water_mix))), 0)
+        corporation = Corporation(corporation_water_share)
+        borewell = Borewell(borewell_water_share)
+
         tanker = Tanker(self.additional_water_consumption)
-        corporation = Corporation(
-            default_consumption
-            * self.default_water_mix[0]
-            / sum(self.default_water_mix)
-        )
-        borewell = Borewell(
-            default_consumption
-            * self.default_water_mix[1]
-            / sum(self.default_water_mix)
-        )
+
         total_bill = (
             tanker.monthly_bill + corporation.monthly_bill + borewell.monthly_bill
         )
@@ -86,56 +82,67 @@ class Apartment:
 class Water:
     """General class of water"""
 
-    def __init__(self, type: str) -> None:
-        self.type: str = type
+    def __init__(self, monthly_consumption: float) -> None:
+        if  not(isinstance(monthly_consumption, float) or isinstance(monthly_consumption, int)):
+            raise TypeError
+        self.type: str = ''
         self.unit_rate: float = 0.0
+        self.monthly_consumption: float = float(monthly_consumption)
         self.monthly_bill: float = 0.0
 
+    def __add__(self, other):
+        total_consumption = self.monthly_consumption + other.monthly_consumption
+        return Water(total_consumption)
+
+    def compute_monthly_bill(self):
+        if self.type == 'Tanker':
+            if self.monthly_consumption <= 500:
+                self.monthly_bill = self.monthly_consumption * 2
+            elif self.monthly_consumption > 500 and self.monthly_consumption <= 1500:
+                self.monthly_bill = (500 * 2) + (self.monthly_consumption - 500) * 3
+            elif self.monthly_consumption >= 1500 and self.monthly_consumption <= 3000:
+                self.monthly_bill = (
+                    (500 * 2) + (1000 * 3) + (self.monthly_consumption - 1500) * 5
+                )
+            else:
+                self.monthly_bill = (
+                    (500 * 2)
+                    + (1000 * 3)
+                    + (1500 * 5)
+                    + (self.monthly_consumption - 3000) * 8
+                )
+        else:
+            self.monthly_bill = round((self.monthly_consumption * self.unit_rate), 0)
+            return self.monthly_bill
 
 class Corporation(Water):
     """Corporation water"""
 
     def __init__(self, monthly_consumption: float) -> None:
-        super().__init__("Corporation")
-        self.monthly_consumption: float = monthly_consumption
+        super().__init__(monthly_consumption)
+        self.type: str = "Corporation"
         self.unit_rate: float = 1.0
-        self.monthly_bill: float = self.monthly_consumption * self.unit_rate
+        self.monthly_bill: int = 0
+        super().compute_monthly_bill()
 
 
 class Borewell(Water):
     """Borewell water"""
 
     def __init__(self, monthly_consumption: float) -> None:
-        super().__init__("Borewell")
-        self.monthly_consumption: float = monthly_consumption
+        super().__init__(monthly_consumption)
+        self.type: str = "Borwell"
         self.unit_rate: float = 1.5
-        self.monthly_bill: float = self.monthly_consumption * self.unit_rate
+        self.monthly_bill: int = 0
+        super().compute_monthly_bill()
 
 
 class Tanker(Water):
     """Tanker water"""
 
     def __init__(self, monthly_consumption: float) -> None:
-        super().__init__("Tanker")
-        self.monthly_consumption: float = monthly_consumption
+        super().__init__(monthly_consumption)
+        self.type: str = "Tanker"
         self.unit_rate: float = 0.0
-        self.monthly_bill: float = 0.0
-        self.__calculate_bill()
-
-    def __calculate_bill(self) -> None:
-        """Calculate the monthly bill according to the slab-rate"""
-        if self.monthly_consumption <= 500:
-            self.monthly_bill = self.monthly_consumption * 2
-        elif self.monthly_consumption > 500 and self.monthly_consumption <= 1500:
-            self.monthly_bill = (500 * 2) + (self.monthly_consumption - 500) * 3
-        elif self.monthly_consumption >= 1500 and self.monthly_consumption <= 3000:
-            self.monthly_bill = (
-                (500 * 2) + (1000 * 3) + (self.monthly_consumption - 1500) * 5
-            )
-        else:
-            self.monthly_bill = (
-                (500 * 2)
-                + (1000 * 3)
-                + (1500 * 5)
-                + (self.monthly_consumption - 3000) * 8
-            )
+        self.monthly_bill: int = 0.0
+        super().compute_monthly_bill()

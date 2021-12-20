@@ -139,17 +139,21 @@ class Test(unittest.TestCase):
 
     def test_normal_water_type(self):
         """Tests Water class"""
-        normal_water = Water("Normal")
-        self.assertEqual(normal_water.type, "Normal")
+        normal_water = Water(1000)
+        self.assertEqual(normal_water.type, '')
+
+    def test_normal_water_type_exception(self):
+        """Tests Water class"""
+        self.assertRaises(TypeError, Water, 'string_value')
 
     def test_normal_water_unit_rate(self):
         """Tests Water class"""
-        normal_water = Water("Normal")
+        normal_water = Water(1000)
         self.assertAlmostEqual(normal_water.unit_rate, 0.0, 0)
 
     def test_normal_water_monthly_bill(self):
         """Tests Water class"""
-        normal_water = Water("Normal")
+        normal_water = Water(1000)
         self.assertAlmostEqual(normal_water.monthly_bill, 0.0, 0)
 
     def test_corporation_water(self):
