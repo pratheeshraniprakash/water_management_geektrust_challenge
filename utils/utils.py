@@ -69,7 +69,7 @@ class Output:
                 consumption = apartment.compute_monthly_water_consumption()
                 bill = int(round(apartment.compute_monthly_bill(), 0))
                 return (consumption, bill)
-        return
+        return None
 
 
 class Command:
